@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Finalizar Pedido | Tienda Urbana</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+  <header class="header">
+    <div class="header-inner container">
+      <div class="logo">Tienda Urbana</div>
+      <nav class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="productos.html">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="#" id="openCartPedido" class="cart-badge">🛒 <span id="cantidadPedido">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <h2 class="title">Finalizar tu Pedido</h2>
+    <div id="resumenPedido" class="form-wrap"></div>
+
+    <form id="formPedido" class="form-wrap">
+      <div class="form-row">
+        <label>Nombre completo</label>
+        <input type="text" id="nombre" required>
+      </div>
+
+      <div class="form-row">
+        <label>Teléfono / WhatsApp</label>
+        <input type="text" id="telefono" required>
+      </div>
+
+      <div class="form-row">
+        <label>Dirección de entrega</label>
+        <input type="text" id="direccion" required>
+      </div>
+
+      <div class="form-row">
+        <label>Medio de pago</label>
+        <select id="metodoPago" required>
+          <option value="">Selecciona...</option>
+          <option value="Contra entrega">Contra entrega</option>
+          <option value="Transferencia">Transferencia</option>
+          <option value="Nequi / Daviplata">Nequi / Daviplata</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" id="cancelarPedido" class="btn-ghost">Cancelar</button>
+        <button type="submit" class="btn-main">Enviar por WhatsApp</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">
+    <p>© 2025 Tienda Urbana — Distribuidor Independiente</p>
+  </footer>
+
+  <script>
+    const resumenDiv = document.getElementById('resumenPedido');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function renderResumen() {
+      if (carrito.length === 0) {
+        resumenDiv.innerHTML = "<p>No tienes productos en el carrito.</p>";
+        return;
+      }
+      let total = 0;
+      let html = '<h3>Resumen del pedido:</h3><ul>';
+      carrito.forEach(i => {
+        total += i.precio * i.cantidad;
+        html += `<li>${i.nombre} x${i.cantidad} - $${(i.precio * i.cantidad).toLocaleString()}</li>`;
+      });
+      html += `</ul><p><strong>Total:</strong> $${total.toLocaleString()}</p>`;
+      resumenDiv.innerHTML = html;
+    }
+
+    renderResumen();
+
+    document.getElementById('formPedido').addEventListener('submit', e => {
+      e.preventDefault();
+      if (carrito.length === 0) return alert("Tu carrito está vacío");
+
+      const nombre = document.getElementById('nombre').value;
+      const telefono = document.getElementById('telefono').value;
+      const direccion = document.getElementById('direccion').value;
+      const metodo = document.getElementById('metodoPago').value;
+
+      const mensaje = `📦 *Nuevo Pedido Tienda Urbana*%0A👤 Nombre: ${nombre}%0A📞 Teléfono: ${telefono}%0A📍 Dirección: ${direccion}%0A💳 Pago: ${metodo}%0A🛍️ Productos:%0A${carrito.map(p=>`- ${p.nombre} x${p.cantidad}`).join('%0A')}%0A💰 Total: $${carrito.reduce((t,p)=>t+p.precio*p.cantidad,0).toLocaleString()}`;
+      window.open(`https://wa.me/573223052104?text=${mensaje}`, '_blank');
+    });
+
+    document.getElementById('cancelarPedido').addEventListener('click', () => {
+      if (confirm("¿Vaciar carrito y regresar?")) {
+        localStorage.removeItem('carrito');
+        window.location.href = 'productos.html';
+      }
+    });
+  </script>
+</body>
+</html>

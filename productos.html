@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tienda Urbana — Productos</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner container">
+      <div class="logo">Tienda Urbana</div>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="index.html">Inicio</a>
+        <a href="productos.html" class="activo">Productos</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="#" id="verCarritoTop" class="cart-badge">🛒 <span id="cantidadCarrito">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container" style="padding-top:48px;">
+    <h1 class="title fade-in">Nuestros Productos</h1>
+
+    <!-- FILTRO -->
+    <div class="filter-bar fade-in">
+      <div class="filter-wrapper">
+        <input type="text" id="searchInput" placeholder="Buscar modelo o marca...">
+        <span class="search-icon">🔍</span>
+      </div>
+    </div>
+
+    <!-- GRID DE PRODUCTOS -->
+    <div class="featured-grid grid-productos fade-in" id="lista-productos">
+      <!-- Productos cargados desde app.js -->
+    </div>
+  </main>
+
+  <!-- BOTÓN VER CARRITO -->
+  <button id="btnVerCarrito" class="btn-main floating-cart-btn" title="Ver carrito">🛒</button>
+
+  <!-- MODAL CARRITO -->
+  <div id="modalCarrito" class="modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">Tu carrito 🛍️</div>
+        <button id="cerrarModal" class="close-btn">✕</button>
+      </div>
+      <div id="itemsCarrito"></div>
+      <div class="cart-total" id="totalCarrito">Total: $0</div>
+      <div class="modal-actions">
+        <button id="vaciarCarrito" class="btn-ghost">Vaciar carrito</button>
+        <button id="realizarPedidoBtn" class="btn-main">Realizar pedido</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOTÓN WHATSAPP -->
+  <a href="https://wa.me/573223052104" class="btn-whatsapp" target="_blank" title="Chatea con nosotros en WhatsApp">
+    <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
+  </a>
+
+  <!-- FOOTER -->
+  <footer class="footer fade-in">
+    <p>© 2025 Tienda Urbana — Distribuidor Independiente</p>
+    <div class="social-links">
+      <a href="https://www.tiktok.com/@tuusuario" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/tiktok.svg" alt="TikTok"></a>
+      <a href="https://www.instagram.com/tuusuario" target="_blank"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram"></a>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="js/app.js" defer></script>
+  <script>
+    document.getElementById('verCarritoTop')?.addEventListener('click', e => {
+      e.preventDefault(); mostrarCarrito();
+    });
+    document.getElementById('realizarPedidoBtn')?.addEventListener('click', () => {
+      window.location.href = 'pedido.html';
+    });
+    document.getElementById('btnVerCarrito')?.addEventListener('click', e => {
+      e.preventDefault(); mostrarCarrito();
+    });
+
+    // Buscador
+    const input = document.getElementById('searchInput');
+    input?.addEventListener('input', e => {
+      const term = e.target.value.toLowerCase();
+      document.querySelectorAll('.product').forEach(p => {
+        const text = p.textContent.toLowerCase();
+        p.style.display = text.includes(term) ? 'block' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
