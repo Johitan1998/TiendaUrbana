@@ -22,7 +22,7 @@
     </div>
   </header>
 
-  <!-- SLIDER / HERO -->
+  <!-- HERO / SLIDER -->
   <section class="slider">
     <div class="slides">
       <div class="slide active" style="background-image:url('img/banner1.png');">
@@ -39,87 +39,55 @@
           <a href="productos.html" class="btn-main">Ver productos</a>
         </div>
       </div>
-      <div class="slide" style="background-image:url('img/banner3.png');">
-        <div class="slide-content">
-          <h1>Autenticidad urbana</h1>
-          <p>Compra seguro, con envío nacional y atención personalizada.</p>
-          <a href="productos.html" class="btn-main">Comprar ahora</a>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- BENEFICIOS -->
-  <section class="section">
+  <!-- DESTACADOS -->
+  <section class="featured">
     <div class="container">
-      <div class="title">¿Por qué elegir Tienda Urbana?</div>
-      <div class="grid-3">
-        <div class="card">
-          <div class="icon">🔥</div>
-          <h3>Tendencia</h3>
-          <p>Modelos modernos que siguen las últimas tendencias urbanas.</p>
-        </div>
-        <div class="card">
-          <div class="icon">🚚</div>
-          <h3>Envíos Nacionales</h3>
-          <p>Rápido y seguro a cualquier ciudad de Colombia.</p>
-        </div>
-        <div class="card">
-          <div class="icon">💬</div>
-          <h3>Atención Directa</h3>
-          <p>Soporte por WhatsApp para resolver dudas y confirmar tallas.</p>
-        </div>
+      <h2 class="title">🔥 Productos Destacados</h2>
+      <p class="subtitle">Descubre lo más vendido esta semana</p>
+
+      <div class="featured-grid">
+        <article class="product-card">
+          <div class="product-img">
+            <img src="img/Nike-Shox-TL.jpeg" alt="Nike Shox TL">
+          </div>
+          <div class="product-info">
+            <h3>Nike Shox TL</h3>
+            <p class="price">$185.000</p>
+            <a href="producto.html?id=1" class="btn-main">Ver Detalles</a>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">
+            <img src="img/Puma-Roma-BMW-M-Motorsport.jpeg" alt="Puma Roma">
+          </div>
+          <div class="product-info">
+            <h3>Puma Roma BMW M Motorsport</h3>
+            <p class="price">$170.000</p>
+            <a href="producto.html?id=2" class="btn-main">Ver Detalles</a>
+          </div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-img">
+            <img src="img/Item-14.jpeg" alt="Nike Air Force 1">
+          </div>
+          <div class="product-info">
+            <h3>Nike Air Force 1</h3>
+            <p class="price">$160.000</p>
+            <a href="producto.html?id=14" class="btn-main">Ver Detalles</a>
+          </div>
+        </article>
+      </div>
+
+      <div style="text-align: center; margin: 20px 0;">
+        <a href="productos.html" class="btn-main" style="padding: 10px 20px; font-size: 1rem;">Ver Todos</a>
       </div>
     </div>
   </section>
-
-<!-- PRODUCTOS DESTACADOS (nuevo diseño premium) -->
-<section class="featured">
-  <div class="container">
-    <h2 class="title">🔥 Productos Destacados</h2>
-    <p class="subtitle">Descubre lo más vendido esta semana</p>
-
-    <div class="featured-grid">
-      <article class="product-card">
-        <div class="product-img">
-          <img src="img/Nike-Shox-TL.jpeg" alt="Nike Shox TL">
-        </div>
-        <div class="product-info">
-          <h3>Nike Shox TL</h3>
-          <p class="price">$185.000</p>
-          <a href="productos.html" class="btn-main">Ver Detalles</a>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div class="product-img">
-          <img src="img/Puma-Roma-BMW-M-Motorsport.jpeg" alt="Puma Roma BMW M Motorsport">
-        </div>
-        <div class="product-info">
-          <h3>Puma Roma BMW M Motorsport</h3>
-          <p class="price">$170.000</p>
-          <a href="productos.html" class="btn-main">Ver Detalles</a>
-        </div>
-      </article>
-
-      <article class="product-card">
-        <div class="product-img">
-          <img src="img/Item-14.jpeg" alt="Nike Air Force 1">
-        </div>
-        <div class="product-info">
-          <h3>Nike Air Force 1</h3>
-          <p class="price">$170.000</p>
-          <a href="productos.html" class="btn-main">Ver Detalles</a>
-        </div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- BOTÓN VER TODOS -->
-<div style="text-align: center; margin: 20px 0;">
-  <a href="productos.html" class="btn-main" style="padding: 10px 20px; font-size: 1rem;">Ver Todos</a>
-</div>
 
   <!-- FOOTER -->
   <footer class="footer">
@@ -137,26 +105,31 @@
     </div>
   </footer>
 
-  <!-- Botón flotante WhatsApp -->
+  <!-- MODAL CARRITO -->
+  <div id="modalCarrito" class="modal">
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-title">Tu carrito 🛍️</div>
+        <button id="cerrarModal" class="close-btn">✕</button>
+      </div>
+      <div id="itemsCarrito"></div>
+      <div class="cart-total" id="totalCarrito">Total: $0</div>
+      <div class="modal-actions">
+        <button id="vaciarCarrito" class="btn-ghost">Vaciar carrito</button>
+        <a href="pedido.html" class="btn-main">Realizar pedido</a>
+      </div>
+    </div>
+  </div>
+
   <a href="https://wa.me/573223052104" class="btn-whatsapp" target="_blank">
     <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/whatsapp.svg" alt="WhatsApp">
   </a>
 
+  <script src="js/app.js" defer></script>
   <script>
-    const cart = JSON.parse(localStorage.getItem('carrito')) || [];
-    document.getElementById('cartCountTop').textContent = cart.reduce((a,b)=>a+(b.cantidad||0),0);
-    document.getElementById('openCartTop')?.addEventListener('click', (e)=>{
-      e.preventDefault(); window.location.href='productos.html';
+    document.getElementById('openCartTop')?.addEventListener('click', e => {
+      e.preventDefault(); mostrarCarrito();
     });
-
-    // Slider automático
-    let current = 0;
-    const slides = document.querySelectorAll('.slide');
-    setInterval(()=>{
-      slides[current].classList.remove('active');
-      current = (current + 1) % slides.length;
-      slides[current].classList.add('active');
-    }, 5000);
   </script>
 </body>
 </html>

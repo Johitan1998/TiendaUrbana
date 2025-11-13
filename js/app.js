@@ -1,5 +1,5 @@
 // =========================================
-// Tienda Urbana - app.js (2025 Optimizado)
+// Tienda Urbana - app.js (versión estable)
 // =========================================
 
 // ====== SLIDER ======
@@ -73,14 +73,17 @@ const modal = document.getElementById('modalCarrito');
 const itemsCarritoEl = document.getElementById('itemsCarrito');
 const totalCarritoEl = document.getElementById('totalCarrito');
 
+// ====== MOSTRAR PRODUCTOS ======
 function renderProductos() {
   if (!contenedorProductos) return;
   contenedorProductos.innerHTML = '';
   productos.forEach(p => {
     const div = document.createElement('article');
-    div.className = 'product';
+    div.className = 'product fade-in';
     div.innerHTML = `
-      <img src="${p.imagen}" alt="${p.nombre}">
+      <a href="producto.html?id=${p.id}" class="product-link">
+        <img src="${p.imagen}" alt="${p.nombre}">
+      </a>
       <div class="product-body">
         <div class="product-title">${p.nombre}</div>
         <div class="product-price">$${p.precio.toLocaleString()}</div>
@@ -93,6 +96,7 @@ function renderProductos() {
   });
 }
 
+// ====== FUNCIONES CARRITO ======
 function agregarAlCarrito(id) {
   const prod = productos.find(x => x.id === id);
   if (!prod) return;
@@ -165,6 +169,7 @@ function mostrarCarrito() {
 document.addEventListener('click', e => {
   if (e.target === modal) modal.style.display = 'none';
 });
+
 document.addEventListener('DOMContentLoaded', ()=>{
   renderProductos();
   actualizarContadores();
@@ -174,21 +179,13 @@ document.addEventListener('DOMContentLoaded', ()=>{
   if (vaciar) vaciar.addEventListener('click', ()=> { if (confirm('Vaciar carrito?')) vaciarCarrito(); });
 });
 
-window.agregarAlCarrito = agregarAlCarrito;
-window.eliminarDelCarrito = eliminarDelCarrito;
-window.mostrarCarrito = mostrarCarrito;
-window.vaciarCarrito = vaciarCarrito;
-// ===============================
-// Animación: Fade-In al hacer scroll
-// ===============================
+// ====== ANIMACIÓN FADE-IN ======
 document.addEventListener("DOMContentLoaded", () => {
   const faders = document.querySelectorAll('.fade-in');
-
   const appearOptions = {
-    threshold: 0.2, // visible en un 20%
+    threshold: 0.2,
     rootMargin: "0px 0px -50px 0px"
   };
-
   const appearOnScroll = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
@@ -196,6 +193,11 @@ document.addEventListener("DOMContentLoaded", () => {
       observer.unobserve(entry.target);
     });
   }, appearOptions);
-
   faders.forEach(fadeEl => appearOnScroll.observe(fadeEl));
 });
+
+// ====== EXPORTAR FUNCIONES GLOBALES ======
+window.agregarAlCarrito = agregarAlCarrito;
+window.eliminarDelCarrito = eliminarDelCarrito;
+window.mostrarCarrito = mostrarCarrito;
+window.vaciarCarrito = vaciarCarrito;

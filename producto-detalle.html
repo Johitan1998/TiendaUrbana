@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Urbana — Detalle del Producto</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner container">
+    <div class="logo">Tienda Urbana</div>
+    <nav class="nav">
+      <a href="index.html">Inicio</a>
+      <a href="productos.html">Productos</a>
+      <a href="contacto.html">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" id="detalle-producto" style="padding-top:48px;">
+  <!-- Producto se carga dinámicamente -->
+</main>
+
+<footer class="footer">
+  <p>© 2025 Tienda Urbana — Distribuidor Independiente</p>
+</footer>
+
+<script src="js/app.js" defer></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get('id'));
+  const producto = productos.find(p => p.id === id);
+  const contenedor = document.getElementById('detalle-producto');
+
+  if (producto && contenedor) {
+    contenedor.innerHTML = `
+      <div class="product-detail">
+        <div class="product-images">
+          <img src="${producto.imagen}" alt="${producto.nombre}" class="main-image">
+        </div>
+        <div class="product-info">
+          <h1>${producto.nombre}</h1>
+          <p class="price">$${producto.precio.toLocaleString()}</p>
+          <p class="description">Descripción del producto aquí...</p>
+
+          <label for="talla">Talla:</label>
+          <select id="talla">
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+          </select>
+
+          <label for="color">Color:</label>
+          <select id="color">
+            <option value="negro">Negro</option>
+            <option value="blanco">Blanco</option>
+          </select>
+
+          <button onclick="agregarAlCarrito(${producto.id})" class="btn-main">Agregar al carrito</button>
+          <a href="productos.html" class="btn-secondary">Ver todos</a>
+        </div>
+      </div>
+    `;
+  } else {
+    contenedor.innerHTML = "<p>Producto no encontrado.</p>";
+  }
+});
+</script>
+
+</body>
+</html>
